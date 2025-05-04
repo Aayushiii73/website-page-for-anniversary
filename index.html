@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy 3 Years, My Love!</title>
+  <style>
+    body {
+      /*       
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background: #fff0f6; */
+      margin: 0;
+      padding: 0;
+      color: #333;
+      overflow-x: hidden;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom right, #ffb6c1, #ffe4e1);
+      color: #880e4f;
+    }
+
+    .hero-section {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      height: 100vh;
+      padding: 20px;
+      color: #fff;
+    }
+
+    .hero-section .title {
+      font-size: 3em;
+      margin-bottom: 0.5em;
+      animation: fadeInDown 1.5s ease;
+    }
+
+    .hero-section .subtitle {
+      font-size: 1.5em;
+      margin-bottom: 1em;
+      animation: fadeInUp 2s ease;
+    }
+
+    .cta-button {
+      padding: 12px 30px;
+      font-size: 1.2em;
+      background-color: #fff;
+      color: #ff69b4;
+      border: none;
+      border-radius: 30px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      margin-bottom: 2em;
+    }
+
+    .cta-button:hover {
+      background-color: #ff69b4;
+      color: #fff;
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    header {
+      background: #ff85c1;
+      padding: 2rem;
+      text-align: center;
+      color: white;
+    }
+
+    .section {
+      padding: 2rem;
+    }
+
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .timeline-item {
+      background: #ffe6ef;
+      padding: 1rem;
+      border-radius: 1rem;
+    }
+
+    .love-note {
+      background: linear-gradient(135deg, #ffe0f0, #ffd6ec);
+      padding: 2.5rem;
+      text-align: left;
+      font-size: 1.2rem;
+      border-radius: 1.5rem;
+      margin: 2.5rem auto;
+      max-width: 600px;
+      box-shadow: 0 4px 12px rgba(255, 105, 180, 0.2);
+      color: #880e4f;
+      line-height: 1.8;
+      position: relative;
+    }
+
+    .love-note h2 {
+      text-align: center;
+      color: #d63384;
+      margin-bottom: 1.2rem;
+      font-size: 1.8rem;
+      font-weight: bold;
+    }
+
+    .love-note-list {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .love-note-list li {
+      margin-bottom: 10px;
+      padding-left: 10px;
+      position: relative;
+      font-weight: 500;
+    }
+
+    @keyframes fadeSlideUp {
+      0% {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .love-note {
+      animation: fadeSlideUp 1.2s ease-out both;
+    }
+
+    .hearts {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      transform: rotate(45deg);
+      animation: float 3s linear infinite;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0) rotate(45deg);
+        opacity: 1;
+      }
+
+      100% {
+        transform: translateY(-100vh) rotate(45deg);
+        opacity: 0;
+      }
+    }
+
+    button {
+      background-color: #ff85c1;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      margin: 5px;
+      border-radius: 1rem;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #ff5fa2;
+    }
+
+    /* Image container smooth animation */
+    #image-container {
+      margin-top: 20px;
+      display: none;
+      opacity: 0;
+      transform: scale(0.95);
+      transition: opacity 1s ease, transform 1s ease;
+      height: auto
+    }
+
+    #image-container.show {
+      display: block;
+      opacity: 1;
+      transform: scale(1);
+      height: auto
+    }
+
+    /* Fade for question and options */
+    #question,
+    #options {
+      transition: opacity 0.8s ease;
+    }
+
+    .fade-out {
+      opacity: 0;
+    }
+
+    .journey-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #ff6a88, #ff99ac);
+      padding: 12px 24px;
+      color: white;
+      border-radius: 30px;
+      font-size: 18px;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .journey-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+    }
+
+    .journey-btn span {
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+
+    .journey-btn:hover span {
+      transform: translateX(5px);
+    }
+
+    .journey-wrapper {
+      text-align: center;
+      padding: 2rem;
+      background: #ffe4ec;
+      border-radius: 20px;
+      margin: 2rem auto;
+      max-width: 600px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .journey-quote {
+      font-size: 1.3rem;
+      color: #d63384;
+      margin-bottom: 1rem;
+      font-style: italic;
+    }
+
+    .decorative-line {
+      font-size: 1.5rem;
+      color: #ff6b81;
+      margin: 1rem 0;
+    }
+
+    h2.memories-title {
+      font-family: 'Georgia', serif;
+      font-size: 2.5rem;
+      color: #d63384;
+      text-align: center;
+      position: relative;
+      margin-bottom: 1.5rem;
+      animation: fadeIn 1.5s ease;
+    }
+
+    h2.memories-title::after {
+      content: "💖";
+      position: absolute;
+      right: -30px;
+      top: 0;
+      font-size: 1.5rem;
+    }
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .memories-underline {
+      width: 100px;
+      height: 4px;
+      background: linear-gradient(90deg, #ff85c1, #ffb6d9);
+      border-radius: 2px;
+      margin: 0 auto 20px;
+    }
+
+    #memory-box,
+    #image-container img {
+      position: relative;
+      z-index: 2;
+      height: auto
+        /* Higher than .hearts */
+    }
+
+    .memory-btn {
+      padding: 10px 24px;
+      font-size: 1.1em;
+      background-color: #fff;
+      color: #d63384;
+      border: 2px solid #ff85c1;
+      border-radius: 25px;
+      margin: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: bold;
+    }
+
+    .memory-btn:hover {
+      background-color: #ff85c1;
+      color: white;
+      border-color: #ff5fa2;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      padding-bottom: 40px;
+    }
+
+    .nav-links a {
+      background-color: #e91e63;
+      background: linear-gradient(to right, #e91e63, #ec7ea4);
+      color: white;
+      text-decoration: none;
+      padding: 12px 25px;
+      border-radius: 25px;
+      font-size: 1em;
+      transition: background 0.3s ease;
+      width: 220px;
+      text-align: center;
+    }
+
+    .nav-links a:hover {
+      background-color: #a73160;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="hearts" id="hearts"></div>
+
+  <section class="hero-section">
+    <h1 class="title">Happy Anniversary, My Love ❤️</h1>
+    <p class="subtitle">Celebrating our journey, one beautiful moment at a time.</p>
+    <!-- <a href="memory.html" class="cta-button">Start the Journey</a> -->
+  </section>
+
+  <div class="section">
+    <div class="journey-wrapper">
+      <p class="journey-quote">From day one to forever — here’s to our journey together 💖</p>
+      <div class="decorative-line">❤️ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ❤️</div>
+      <a href="index1.html" class="journey-btn">
+        Our Journey <span>→</span>
+      </a>
+      <div class="decorative-line">💌 ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ 💌</div>
+    </div>
+  </div>
+
+  <div class="section" id="memories-section">
+    <h2 class="memories-title">Memories</h2>
+    <div class="memories-underline"></div>
+    <div id="memory-box" style="text-align:center;">
+      <h3 id="question">Loading question...</h3>
+      <div id="options"></div>
+      <div id="image-container">
+        <img id="memory-image" src="" alt="Memory"
+          style="width: 100%; max-width: 600px; height: 650px; border-radius: 1rem;">
+        <br>
+        <button id="prev-btn">⬅️ Previous</button>
+        <button id="next-btn">Next ➡️</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Our Playlist</h2>
+    <ul>
+      <li>"Perfect" by Ed Sheeran</li>
+    </ul>
+    <audio controls autoplay loop>
+      <source src="your-song.mp3" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
+    <ul>
+      <li>"Blinding Nights" by Weeknd</li>
+    </ul>
+    <audio controls autoplay loop>
+      <source src="Blinding Lights (PenduJatt.Com.Se).mp3" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
+  </div>
+
+  <div class="love-note">
+    <h2>💌 See this when...</h2>
+    <ul style="list-style-type: none; padding: 0; line-height: 2;">
+      <li>💔 We had a fight</li>
+      <li>😔 You're feeling sad</li>
+      <li>🌃 You're alone at night</li>
+      <li>😩 You're tired from work or life</li>
+      <li>🤗 You need a hug — real or virtual</li>
+      <li>💭 You're missing me</li>
+      <li>🥺 You want to talk to me but can't</li>
+      <li>🎉 You're really happy and want to share</li>
+      <li>🥹 You just need someone to understand</li>
+      <li>💖 You're doubting us — or yourself</li>
+      <li>❤️‍🔥 Or... you're simply feeling *anything* at all</li>
+    </ul>
+    <p style="margin-top: 1rem; font-style: italic; color: #880e4f;">
+      I'm always with you — in every heartbeat, in every breath, in every quiet little moment. 💗
+    </p>
+  </div>
+
+
+  <script>
+    // Hearts Animation
+    const heartsContainer = document.getElementById('hearts');
+    setInterval(() => {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.top = '100vh';
+      heartsContainer.appendChild(heart);
+      setTimeout(() => heart.remove(), 6000);
+    }, 300);
+
+    // Memories
+    const memories = [
+      {
+        question: "Where did we go on our last date?",
+        options: ["Makahu", "Kasida", "MacD"],
+        correct: "Kasida",
+        image: "date.jpg"
+      },
+
+      {
+        question: "Our favourite dish to order? 🍕",
+        options: ["Pizza", "Pasta", "noodles", "Burger"],
+        correct: "Pasta",
+        image: "quedish.jpg"
+      },
+      {
+        question: "When did we make out in rain🌧️? date yaad hai?😏",
+        options: ["15/03/25", "30/03/25", "kabhi nahi"],
+        correct: "15/03/25",
+        image: "makeout.jpg"
+      },
+      {
+        question: "What is the next movie genre that we will be watching? 🎬",
+        options: ["Horror", "Romantic", "Action", "Cartoon"],
+        correct: "Romantic",
+        image: "que.jpg"
+      },
+      {
+        question: "Our song?",
+        options: ["Perfect", "Blinding nights", "wishlist"],
+        correct: "Perfect",
+        video: "videodance.mp4" // ✅ Using a video instead of image
+      }
+    ];
+    memories.forEach(memory => memory.answered = false);
+    let currentMemory = 0;
+
+    function showMemory(index) {
+      const memory = memories[index];
+      const questionEl = document.getElementById('question');
+      const optionsDiv = document.getElementById('options');
+      const imageContainer = document.getElementById('image-container');
+      const memoryImg = document.getElementById('memory-image');
+
+      // Remove any existing video
+      const existingVideo = document.getElementById('memory-video');
+      if (existingVideo) existingVideo.remove();
+
+      if (memory.answered) {
+        questionEl.innerText = '';
+        optionsDiv.innerHTML = '';
+        imageContainer.classList.remove('show');
+        imageContainer.style.display = 'none';
+
+        if (memory.video) {
+          const video = document.createElement('video');
+          video.id = 'memory-video';
+          video.controls = true;
+          video.src = memory.video;
+          video.style.width = '100%';
+          video.style.maxWidth = '600px';
+          video.style.height = 'auto';
+          video.style.borderRadius = '1rem';
+          video.style.marginTop = '20px';
+          video.setAttribute('autoplay', true);
+          video.setAttribute('loop', true);
+          document.getElementById('memory-box').appendChild(video);
+        } else {
+          memoryImg.src = memory.image;
+          setTimeout(() => {
+            imageContainer.style.display = 'block';
+            setTimeout(() => {
+              imageContainer.classList.add('show');
+            }, 50);
+          }, 50);
+        }
+      } else {
+        questionEl.innerText = memory.question;
+        optionsDiv.innerHTML = '';
+        memory.options.forEach(option => {
+          const btn = document.createElement('button');
+          btn.innerText = option;
+          btn.classList.add('memory-btn');
+          btn.onclick = () => checkAnswer(option);
+          optionsDiv.appendChild(btn);
+        });
+
+        questionEl.classList.remove('fade-out');
+        optionsDiv.classList.remove('fade-out');
+        imageContainer.classList.remove('show');
+        imageContainer.style.display = 'none';
+      }
+    }
+
+    function checkAnswer(selected) {
+      const memory = memories[currentMemory];
+      if (selected === memory.correct) {
+        memory.answered = true;
+
+        const questionEl = document.getElementById('question');
+        const optionsDiv = document.getElementById('options');
+        const imageContainer = document.getElementById('image-container');
+        const memoryImg = document.getElementById('memory-image');
+
+        const existingVideo = document.getElementById('memory-video');
+        if (existingVideo) existingVideo.remove();
+
+        questionEl.classList.add('fade-out');
+        optionsDiv.classList.add('fade-out');
+
+        setTimeout(() => {
+          optionsDiv.innerHTML = '';
+          questionEl.innerText = '';
+
+          if (memory.video) {
+            const video = document.createElement('video');
+            video.id = 'memory-video';
+            video.controls = true;
+            video.src = memory.video;
+            video.style.width = '100%';
+            video.style.maxWidth = '600px';
+            video.style.height = 'auto';
+            video.style.borderRadius = '1rem';
+            video.style.marginTop = '20px';
+            video.setAttribute('autoplay', true);
+            video.setAttribute('loop', true);
+            document.getElementById('memory-box').appendChild(video);
+          } else {
+            memoryImg.src = memory.image;
+            imageContainer.style.display = 'block';
+            setTimeout(() => {
+              imageContainer.classList.add('show');
+            }, 50);
+          }
+        }, 800);
+      } else {
+        alert("Oops! Try again, love! 💖");
+      }
+    }
+
+    document.getElementById('next-btn').onclick = () => {
+      if (currentMemory < memories.length - 1) {
+        currentMemory++;
+        showMemory(currentMemory);
+      }
+    };
+
+    document.getElementById('prev-btn').onclick = () => {
+      if (currentMemory > 0) {
+        currentMemory--;
+        showMemory(currentMemory);
+      }
+    };
+
+    showMemory(currentMemory);
+  </script>
+  <div class="nav-links">
+    <a href="file.html">💌 My little note for you💖</a>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Our Journey Together</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      background: #fff0f5;
+      color: #444;
+    }
+
+    h1 {
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 2.5rem;
+      color: #e91e63;
+    }
+
+    .timeline {
+      position: relative;
+      max-width: 1200px;
+      margin: auto;
+      padding: 2rem 0;
+    }
+
+    .timeline::after {
+      content: '';
+      position: absolute;
+      width: 6px;
+      background-color: #e91e63;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      margin-left: -3px;
+    }
+
+    .container {
+      padding: 1rem 2rem;
+      position: relative;
+      background-color: inherit;
+      width: 50%;
+      animation: fadeInUp 1.2s ease both;
+    }
+
+    .container img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      max-height: 400px;
+      border-radius: 1rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .hearts {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      transform: rotate(45deg);
+      animation: float 3s linear infinite;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0) rotate(45deg);
+        opacity: 1;
+      }
+
+      100% {
+        transform: translateY(-100vh) rotate(45deg);
+        opacity: 0;
+      }
+    }
+
+    .left {
+      left: 0;
+    }
+
+    .right {
+      left: 50%;
+    }
+
+    .container::after {
+      content: " ";
+      position: absolute;
+      width: 25px;
+      height: 25px;
+      right: -13px;
+      background-color: #fff;
+      border: 4px solid #e91e63;
+      top: 15px;
+      border-radius: 50%;
+      z-index: 1;
+    }
+
+    .right::after {
+      left: -13px;
+    }
+
+    .content {
+      background-color: #ffe0ec;
+      padding: 1.5rem;
+      border-radius: 1rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .content h2 {
+      color: #d81b60;
+      font-size: 1.5rem;
+    }
+
+    .content p {
+      font-size: 1rem;
+      color: #555;
+    }
+
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media screen and (max-width: 768px) {
+      .timeline::after {
+        left: 31px;
+      }
+
+      .container {
+        width: 100%;
+        padding-left: 70px;
+        padding-right: 25px;
+      }
+
+      .container::after {
+        left: 15px;
+      }
+
+      .right {
+        left: 0%;
+      }
+    }
+
+    .nav-links {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      padding-bottom: 40px;
+    }
+
+    .nav-links a {
+      background-color: #e91e63;
+      background: linear-gradient(to right, #e91e63, #ec7ea4);
+      color: white;
+      text-decoration: none;
+      padding: 12px 25px;
+      border-radius: 25px;
+      font-size: 1em;
+      transition: background 0.3s ease;
+      width: 220px;
+      text-align: center;
+    }
+
+    .nav-links a:hover {
+      background-color: #a73160;
+    }
+
+    .carousel {
+      position: relative;
+      width: 100%;
+      max-width: 100%;
+      overflow: hidden;
+      border-radius: 1rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .carousel-image {
+      width: 100%;
+      height: auto;
+      display: none;
+      border-radius: 1rem;
+    }
+
+    .carousel-image.active {
+      display: block;
+    }
+
+    .carousel button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(233, 30, 99, 0.7);
+      color: white;
+      border: none;
+      font-size: 2rem;
+      padding: 0.3rem 0.8rem;
+      cursor: pointer;
+      border-radius: 50%;
+      z-index: 10;
+      transition: background 0.3s;
+    }
+
+    .carousel button:hover {
+      background-color: rgba(172, 23, 75, 0.9);
+    }
+
+    .carousel .prev {
+      left: 10px;
+    }
+
+    .carousel .next {
+      right: 10px;
+    }
+
+    .container.right .carousel {
+      position: relative;
+      width: 100%;
+      overflow: visible;
+      /* important */
+    }
+
+    .container.right {
+      overflow: visible;
+    }
+
+    .carousel button {
+      background-color: rgba(233, 30, 99, 0.7);
+      z-index: 20;
+      /* Increase z-index to be above carousel images */
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+
+<body>
+  <div class="hearts" id="hearts"></div>
+  <h1>Our Journey Together</h1>
+  <script>
+    // Hearts Animation
+    const heartsContainer = document.getElementById('hearts');
+    setInterval(() => {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.top = '100vh';
+      heartsContainer.appendChild(heart);
+      setTimeout(() => heart.remove(), 6000);
+    }, 300);
+  </script>
+
+  <!-- carousel -->
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.carousel').forEach(carousel => {
+        const images = carousel.querySelectorAll('.carousel-image');
+        const prev = carousel.querySelector('.prev');
+        const next = carousel.querySelector('.next');
+        let index = 0;
+
+        function showImage(i) {
+          images.forEach((img, idx) => {
+            img.classList.toggle('active', idx === i);
+          });
+        }
+
+        prev.addEventListener('click', () => {
+          index = (index - 1 + images.length) % images.length;
+          showImage(index);
+        });
+
+        next.addEventListener('click', () => {
+          index = (index + 1) % images.length;
+          showImage(index);
+        });
+
+        // Show first image initially
+        showImage(index);
+      });
+    });
+
+  </script>
+
+  <div class="timeline">
+
+    <div class="container left">
+      <div class="content">
+        <img src="first_start.jpg" alt="First Meet">
+        <h2>How We Met</h2>
+        <p>When it all started after you swiftly entered into my dm🤭, little did i know, 3 din pehle jiski id stalk kr
+          rhi thi uska saamne se hi msg aa jayega,
+          I was literally jumping ki kya reply kru kaise batau meri branch civil hai😭 cz ofc i knew everything abt u😏.
+        </p>
+      </div>
+    </div>
+
+    <div class="container right">
+      <div class="content">
+        <h2>The online phase</h2>
+        <div class="carousel">
+          <img src="online meets.jpg" alt="Trip Pic 1" class="carousel-image active">
+          <img src="online taarif.jpg" alt="Trip Pic 2" class="carousel-image">
+          <button class="prev"><i class="fas fa-chevron-left"></i></button>
+          <button class="next"><i class="fas fa-chevron-right"></i></button>
+
+        </div>
+        <p>From the first meet when I was impressed by your way of talking, your jokes, your smile, also your voice and
+          you were
+          also by my knowledge of technology and that I knew samay raina😏, To talking till 7am in the morning, we came
+          closer❤️.
+          Ofc, this ss of u doing my taarif at that time was something to keep forever😂.</p>
+      </div>
+    </div>
+
+    <div class="container left">
+      <div class="content">
+        <h2>That one night when I fell more for u❤️</h2>
+        <div class="carousel">
+          <img src="that one night.webp" alt="Trip Pic 1" class="carousel-image active">
+          <img src="mnc night.jpg" alt="Trip Pic 2" class="carousel-image">
+          <button class="prev"><i class="fas fa-chevron-left"></i></button>
+          <button class="next"><i class="fas fa-chevron-right"></i></button>
+        </div>
+        <p>U were always there whenever I needed u, that day u made me feel so special by coming there to meet me, it
+          meant a lot,
+          that day was when i decided that I will make u my boyfriend😅.
+          This mnc photo is again special kyunki iske pehle tk apni ek bhi saath me photo nahi thi😭,
+          aur bhot butterflies thi jb ye pics click kr rhe the apn🤭❤️😭</p>
+      </div>
+    </div>
+
+    <div class="container right">
+      <div class="content">
+        <h2>Trip to Haridwar</h2>
+        <div class="carousel">
+          <img src="haridwar.jpg" alt="Trip Pic 1" class="carousel-image active">
+          <img src="haridwar11.jpg" alt="Trip Pic 2" class="carousel-image">
+          <button class="prev"><i class="fas fa-chevron-left"></i></button>
+          <button class="next"><i class="fas fa-chevron-right"></i></button>
+        </div>
+        <p>This trip has a different place in my heart, iske baad lagne laga tha maybe tu bhi like krta hai mujhe🥰,
+          aur ye bhi darr tha ki tujhe bhi hint ho gaya hoga😭😂, ofc poore time aise chipank ke saath the, itni care
+          yarr❤️❤️😭😭,
+          u were just winning my heart more and more❤️.</p>
+      </div>
+    </div>
+
+    <div class="container left">
+      <div class="content">
+        <h2>When you said "I Love You"</h2>
+        <div class="carousel">
+          <img src="haridwar1.jpg" alt="Trip Pic 1" class="carousel-image active">
+          <img src="haridwar_prop.jpg" alt="Trip Pic 2" class="carousel-image">
+          <img src="haridwar_prop2.jpg" alt="Trip Pic 2" class="carousel-image">
+          <button class="prev"><i class="fas fa-chevron-left"></i></button>
+          <button class="next"><i class="fas fa-chevron-right"></i></button>
+        </div>
+        <p>uff!! I can't ever forget that moment, we were holding hands so tight like forever, and so close to each
+          other
+          and then u said it, for the first time i felt my heart pumping at that time😂😭.
+        </p>
+      </div>
+    </div>
+
+    <div class="container right">
+      <div class="content">
+        <h2>The Proposal</h2>
+        <div class="carousel">
+          <img src="mussorie2.jpg" alt="Trip Pic 1" class="carousel-image active">
+          <img src="mussorie1.jpg" alt="Trip Pic 2" class="carousel-image">
+          <img src="mussorie.jpg" alt="Trip Pic 2" class="carousel-image">
+          <button class="prev"><i class="fas fa-chevron-left"></i></button>
+          <button class="next"><i class="fas fa-chevron-right"></i></button>
+        </div>
+        <p>ok fine, u knew it already, but i tried my best to surprise u, and idk why sb kuch pata hone ke baad bhi i
+          feared and
+          just wanted to listen one yes from u😅, rose toh mila nahi toh ab ye website se hi kaam chala lo👉👈, ise
+          sambhal ke nahi rkhna pdega😂.
+          I felt so complete with u, I was totally urs and u were mine, we were truely committed❤️❤️</p>
+      </div>
+    </div>
+
+    <div class="container left">
+      <div class="content">
+        <h2>The Trip Series</h2>
+        <div class="carousel">
+          <img src="our first trip.jpg" alt="Trip Pic 1" class="carousel-image active">
+          <img src="trip_bike.jpg" alt="Trip Pic 2" class="carousel-image">
+          <img src="trip_muss.HEIC" alt="Trip Pic 2" class="carousel-image">
+          <img src="trips_ddn.jpg" alt="Trip Pic 2" class="carousel-image">
+          <img src="trip_ddn1.jpg" alt="Trip Pic 2" class="carousel-image">
+          <img src="trip_ddn.jpg" alt="Trip Pic 2" class="carousel-image">
+          <img src="trip_ddn (2).JPG" alt="Trip Pic 2" class="carousel-image">
+          <img src="trips_delhi.jpg" alt="Trip Pic 2" class="carousel-image">
+          <img src="trip_kasol.jpg" alt="Trip Pic 2" class="carousel-image">
+          <img src="trip_delhi.jpg" alt="Trip Pic 2" class="carousel-image">
+          <img src="trip_delhhi1.jpg" alt="Trip Pic 2" class="carousel-image">
+          <img src="trip_fri.jpg" alt="Trip Pic 2" class="carousel-image">
+          <img src="trip_rdv.jpg" alt="Trip Pic 2" class="carousel-image">
+          <img src="trip_rishi.jpg" alt="Trip Pic 2" class="carousel-image">
+          <img src="trip_rishi.HEIC" alt="Trip Pic 2" class="carousel-image">
+          <img src="trip_rishi (2).HEIC" alt="Trip Pic 2" class="carousel-image">
+          <button class="prev"><i class="fas fa-chevron-left"></i></button>
+          <button class="next"><i class="fas fa-chevron-right"></i></button>
+        </div>
+        <p>iske baad toh line se itni trips maare the, here's a recap baby😏.
+          aage bhi hamesha aisehi apne kandhe pe sulana aur bike pe baithana❤️😭. zyada responsibility de di kya?😏
+        </p>
+      </div>
+    </div>
+
+    <!-- <div class="container right">
+      <div class="content">
+        <img src="ganga canal.jpg" alt="Festival Celebration">
+        <h2>Can't forget this day</h2>
+        <p>so romantic😭😭❤️❤️, ye honeymoon period kuch zyada hi acha nahi ja rha?</p>
+      </div>
+    </div> -->
+
+    <div class="container right">
+      <div class="content">
+        <h2>some memories</h2>
+        <div class="carousel">
+          <img src="ete.jpg" alt="Trip Pic 1" class="carousel-image active">
+          <img src="sac_chat.jpg" alt="Trip Pic 2" class="carousel-image">
+          <img src="cutie.jpg" alt="Trip Pic 2" class="carousel-image">
+          <img src="garba.jpg" alt="Trip Pic 2" class="carousel-image">
+          <img src="his tshirt.jpg" alt="Trip Pic 2" class="carousel-image">
+          <img src="photo4.jpg" alt="Trip Pic 2" class="carousel-image">
+          <img src="memo1.jpg" alt="Trip Pic 2" class="carousel-image">
+          <img src="memo2.jpg" alt="Trip Pic 2" class="carousel-image">
+          <img src="memo4.jpg" alt="Trip Pic 2" class="carousel-image">
+          <img src="memo9.jpg" alt="Trip Pic 2" class="carousel-image">
+          <img src="ganga canal.jpg" alt="Trip Pic 2" class="carousel-image">
+          <button class="prev"><i class="fas fa-chevron-left"></i></button>
+          <button class="next"><i class="fas fa-chevron-right"></i></button>
+        </div>
+        <p>With you eveything was so simple, mera night sleep melody se mera morning ka alarm clock, bahar jana hai toh
+          Bhalla,
+          padhai nahi ho rhi toh Bhalla, kapde nahi hai toh Bhalla😂, har choti se badi dikkat ho ya koi bhi baat ho
+          sbka ek solution bs "TU".
+          Mera Cutie❤️, Sweetheart, jaaneman, pyaar sb kuch tu.❤️❤️</p>
+      </div>
+    </div>
+
+    <div class="container left">
+      <div class="content">
+        <h2>Some more memories</h2>
+        <div class="carousel">
+          <img src="mem1.jpg" alt="Trip Pic 1" class="carousel-image active">
+          <img src="mem2.jpg" alt="Trip Pic 2" class="carousel-image">
+          <img src="mem3.jpg" alt="Trip Pic 2" class="carousel-image">
+          <img src="mem4.jpg" alt="Trip Pic 2" class="carousel-image">
+          <img src="memo7.jpg" alt="Trip Pic 2" class="carousel-image">
+          <img src="memo8.jpg" alt="Trip Pic 2" class="carousel-image">
+          <img src="memo5.jpg" alt="Trip Pic 2" class="carousel-image">
+          <img src="memo6.jpg" alt="Trip Pic 2" class="carousel-image">
+          <button class="prev"><i class="fas fa-chevron-left"></i></button>
+          <button class="next"><i class="fas fa-chevron-right"></i></button>
+        </div>
+        <p>itna funny, itna caring, tere saath hamesha hi khush rehti hu mai, tu saath ho toh frk hi nahi pdta koi aur
+          se,
+          aisehi nhi teri sb baatein maanti hu🤭, chahe pool party ho chahe mac me pool khelna, everything feels
+          complete with you❤️.
+        </p>
+      </div>
+    </div>
+
+    <div class="container right">
+      <div class="content">
+        <h2>Bangalore days</h2>
+        <div class="carousel">
+          <img src="blr7.jpg" alt="Trip Pic 1" class="carousel-image active">
+          <img src="blr6.jpg" alt="Trip Pic 2" class="carousel-image">
+          <img src="blr4.jpg" alt="Trip Pic 2" class="carousel-image">
+          <img src="blr1.jpg" alt="Trip Pic 2" class="carousel-image">
+          <img src="blr5.jpg" alt="Trip Pic 2" class="carousel-image">
+          <img src="blr3.jpg" alt="Trip Pic 2" class="carousel-image">
+          <img src="blr2.jpg" alt="Trip Pic 2" class="carousel-image">
+          <img src="blr8.jpg" alt="Trip Pic 2" class="carousel-image">
+          <img src="blr9.jpg" alt="Trip Pic 2" class="carousel-image">
+          <button class="prev"><i class="fas fa-chevron-left"></i></button>
+          <button class="next"><i class="fas fa-chevron-right"></i></button>
+        </div>
+        <p>The best time of our reln? Tere flat aana, tere haath ka bana hua khana❤️😭, can't explain the feeling in
+          words,
+          kaafi impress hui thi mai tujhse😏, all the days we have spent together in blr were amazing❤️, sb kuch kr
+          liya😂.
+          Tera bday, mera bday, wonderla, odi finals🤭, church street, movies, mall and all the outings❤️</p>
+      </div>
+    </div>
+
+    <div class="container left">
+      <div class="content">
+        <h2>Placement season</h2>
+        <div class="carousel">
+          <img src="ps8.jpg" alt="Trip Pic 1" class="carousel-image active">
+          <img src="ps2.jpg" alt="Trip Pic 2" class="carousel-image">
+          <img src="ps3.jpg" alt="Trip Pic 3" class="carousel-image">
+          <img src="ps4.jpg" alt="Trip Pic 3" class="carousel-image">
+          <img src="ps6.jpg" alt="Trip Pic 3" class="carousel-image">
+          <img src="ps5.jpg" alt="Trip Pic 3" class="carousel-image">
+          <img src="ps1.jpg" alt="Trip Pic 3" class="carousel-image">
+          <img src="ps7.jpg" alt="Trip Pic 3" class="carousel-image">
+          <button class="prev"><i class="fas fa-chevron-left"></i></button>
+          <button class="next"><i class="fas fa-chevron-right"></i></button>
+        </div>
+        <p>The most difficult time for both of us and i'm proud and will always be that we are together even after that,
+          all bcz of u, thank you for being my support sytem, my guide, hamesha tha tu har choti se badi dikkat ke liye
+          Can't thank god more for sending u to me🤭❤️.
+        </p>
+      </div>
+    </div>
+
+    <div class="container right">
+      <div class="content">
+        <h2>Trip Series 2</h2>
+        <div class="carousel">
+          <img src="tripseries2 1.jpg" alt="Trip Pic 2" class="carousel-image">
+          <img src="tripseries (1).jpg" alt="Trip Pic 1" class="carousel-image active">
+          <img src="tripseries (2).jpg" alt="Trip Pic 2" class="carousel-image">
+          <img src="tripseries (3).jpg" alt="Trip Pic 2" class="carousel-image">
+          <img src="tripseries2 (1).jpg" alt="Trip Pic 2" class="carousel-image">
+          <img src="tripseries2 (2).jpg" alt="Trip Pic 2" class="carousel-image">
+          <img src="tripseries2.jpg" alt="Trip Pic 2" class="carousel-image">
+          <img src="tripseries2 2.jpg" alt="Trip Pic 2" class="carousel-image">
+          <button class="prev"><i class="fas fa-chevron-left"></i></button>
+          <button class="next"><i class="fas fa-chevron-right"></i></button>
+        </div>
+        <p>uk the best part? I always wanted to go on a ride with my boyfriend, this is something i love the most about
+          trips😂, i get to sit behind u,
+          hold u tightly and just feel u, These trips were something I will never forget, especially Rishikesh and
+          Haridwar jab akele gaye the❤️.
+          Toh kabhi apni bhot ladai ho, then just take me on a trip with u🤭.</p>
+      </div>
+    </div>
+
+    <div class="container left">
+      <div class="content">
+        <h2>The last months of clg</h2>
+        <div class="carousel">
+          <img src="lastmemo.jpg" alt="Trip Pic 1" class="carousel-image active">
+          <img src="last2.jpg" alt="Trip Pic 2" class="carousel-image">
+          <img src="last3.jpg" alt="Trip Pic 3" class="carousel-image">
+          <img src="last4.jpg" alt="Trip Pic 3" class="carousel-image">
+          <img src="last5.jpg" alt="Trip Pic 3" class="carousel-image">
+          <img src="last6.jpg" alt="Trip Pic 3" class="carousel-image">
+          <img src="last7.jpg" alt="Trip Pic 3" class="carousel-image">
+          <img src="last8.jpg" alt="Trip Pic 3" class="carousel-image">
+          <img src="last8.jpg" alt="Trip Pic 3" class="carousel-image">
+          <img src="last9.jpg" alt="Trip Pic 3" class="carousel-image">
+          <img src="last10.jpg" alt="Trip Pic 3" class="carousel-image">
+          <img src="last11.jpg" alt="Trip Pic 3" class="carousel-image">
+          <img src="last12.jpg" alt="Trip Pic 3" class="carousel-image">
+          <img src="last13.jpg" alt="Trip Pic 3" class="carousel-image">
+          <img src="last14.jpg" alt="Trip Pic 3" class="carousel-image">
+          <img src="last15.jpg" alt="Trip Pic 3" class="carousel-image">
+          <img src="last16.jpg" alt="Trip Pic 3" class="carousel-image">
+          <img src="last17.jpg" alt="Trip Pic 3" class="carousel-image">
+          <img src="last18.jpg" alt="Trip Pic 3" class="carousel-image">
+          <img src="last19.jpg" alt="Trip Pic 3" class="carousel-image">
+          <img src="last20.jpg" alt="Trip Pic 3" class="carousel-image">
+          <button class="prev"><i class="fas fa-chevron-left"></i></button>
+          <button class="next"><i class="fas fa-chevron-right"></i></button>
+        </div>
+        <p>and here we are having no idea how the honeymoon period was 3yrs long, and we will have to be apart for some
+          time,
+          but we have these many meories together to cherish everytime when we miss each other.
+          Tere saath itna kuch kr liya ki ab tu alg hi nahi lagta, kuch bhi bol lo tujhe, kaise bhi reh lo, I dont care
+          how i'm infront of u,
+          Tu mera hi hai bs aur mai teri❤️.
+          Ye wali thodi badi hai😅
+        </p>
+      </div>
+    </div>
+
+
+
+  </div>
+  <div class="nav-links">
+    <a href="index.html">💌 Go back to where we started</a>
+  </div>
+
+</body>
+
+</html>
